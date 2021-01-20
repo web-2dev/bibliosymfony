@@ -30,11 +30,14 @@ class AbonneType extends AbstractType
                 ]
             ])
             ->add('password', PasswordType::class, [
-                "label" => "Mot de passe*"
-                ])
+                "label" => "Mot de passe*",
+                "required" => false,
+                "mapped" => false
+            ])
             ->add('roles', ChoiceType::class, [
                 "choices" => [
-                    "Lecteur" => "ROLE_USER",
+                    "Abonné" => "ROLE_USER",
+                    "Lecteur" => "ROLE_LECTEUR",
                     "Bibliothécaire" => "ROLE_BIBLIOTHECAIRE",
                     "Directeur" => "ROLE_ADMIN"
                 ],
@@ -48,21 +51,21 @@ class AbonneType extends AbstractType
             ->add('nom', TextType::class, [
                 "required" => false
             ])
-            ->add("cgu", CheckboxType::class, [
-                "label" => "J'accepte les Conditions Générales d'Utilisation",
-                /* L'option "mapped" permet de préciser si le champ est lié à la classe Entity qui a servit 
-                    à créer le formulaire (ici, Entity\Abonne)
-                    Par défaut "mapped" vaut true. Si on met false, la valeur du champ ne modifiera pas
-                    une propriété de l'objet Abonne lié au formulaire
-                */
-                "mapped" => false,
-                "required" => false,
-                "constraints" => [
-                    new IsTrue([
-                        "message" => "Vous devez accepter les C.G.U"
-                    ])
-                ]
-            ])
+            // ->add("cgu", CheckboxType::class, [
+            //     "label" => "J'accepte les Conditions Générales d'Utilisation",
+            //     /* L'option "mapped" permet de préciser si le champ est lié à la classe Entity qui a servit 
+            //         à créer le formulaire (ici, Entity\Abonne)
+            //         Par défaut "mapped" vaut true. Si on met false, la valeur du champ ne modifiera pas
+            //         une propriété de l'objet Abonne lié au formulaire
+            //     */
+            //     "mapped" => false,
+            //     "required" => false,
+            //     "constraints" => [
+            //         new IsTrue([
+            //             "message" => "Vous devez accepter les C.G.U"
+            //         ])
+            //     ]
+            // ])
         ;
     }
 

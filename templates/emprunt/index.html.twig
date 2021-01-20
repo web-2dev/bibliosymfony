@@ -18,7 +18,13 @@
                     <td>{{ emprunt.abonne.pseudo }}</td>
                     <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
                     <td>{{ emprunt.dateemprunt|date("d/m/Y") }}</td>
-                    <td>{{ emprunt.dateRetour|date("d/m/Y") }}</td>
+                    <td>
+                        {% if emprunt.dateRetour is null %}
+                            <a href="{{ path("emprunt_retour", {"id": emprunt.id}) }}" class="btn btn-warning">à rendre</a>
+                        {% else %}
+                            {{ emprunt.dateRetour|date("d/m/Y") }}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

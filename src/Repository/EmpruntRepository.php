@@ -19,6 +19,20 @@ class EmpruntRepository extends ServiceEntityRepository
         parent::__construct($registry, Emprunt::class);
     }
 
+
+    public function findByNonRendu()
+    {
+        /*
+            SELECT * FROM emprunt e WHERE e.date_retour IS NULL
+        */
+        return $this->createQueryBuilder('e')
+            ->where('e.date_retour IS NULL')
+            ->orderBy('e.date_emprunt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Emprunt[] Returns an array of Emprunt objects
     //  */

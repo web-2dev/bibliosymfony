@@ -10,6 +10,7 @@ use App\Entity\Livre;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\LivreRepository;
 use App\Form\LivreType;
+use App\Repository\EmpruntRepository;
 
 /**
  * @Route("/admin")

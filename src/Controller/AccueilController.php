@@ -14,9 +14,10 @@ class AccueilController extends AbstractController
      */
     public function index(LivreRepository $lr): Response
     {
-        
+        $livresNonRendus = $lr->findByNonRendu();
         return $this->render('base.html.twig', [
             'liste_livres' =>  $lr->findAll(),
+            'liste_livres_indisponibles' => $livresNonRendus
         ]);
     }
 }

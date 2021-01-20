@@ -74,9 +74,11 @@ class AbonneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $mdp = $abonne->getPassword();
-            $mdp = $encoder->encodePassword($abonne, $mdp);
-            $abonne->setPassword($mdp);
+            $mdp = $form->get("password")->getData();
+            if( trim($mdp) ){
+                $mdp = $encoder->encodePassword($abonne, $mdp);
+                $abonne->setPassword($mdp);
+            }
 
             $this->getDoctrine()->getManager()->flush();
 

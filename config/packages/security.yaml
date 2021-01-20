@@ -36,4 +36,8 @@ security:
     # REGEX : expression régulière ^/admin signifie "les chaînes de caractères qui commencent par /admin"
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/lecteur, roles: ROLE_LECTEUR }
+    
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_BIBLIOTHECAIRE
+        ROLE_BIBLIOTHECAIRE: ROLE_USER, ROLE_EXEMPLE

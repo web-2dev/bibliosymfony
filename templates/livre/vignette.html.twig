@@ -17,5 +17,11 @@
         <a href="" class="card-link">
             <i class="fa fa-book"></i> Voir plus
         </a>
+
+        {% if is_granted("ROLE_LECTEUR") and livre not in liste_livres_indisponibles %}
+            <a href="{{ path("lecteur_emprunter", {"id": livre.id}) }}" class="card-link btn btn-primary">
+                Emprunter
+            </a>
+        {% endif %}
     </div>
 </div>
