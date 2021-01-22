@@ -77,18 +77,24 @@
 						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
 							<li class="nav-item">
 								{# <a class="nav-link" href="#">{{ app.user.pseudo }}</a> #}
-								<a class="nav-link" href="#">{{ app.user.username }}</a>
+								<a class="nav-link user" href="{{ is_granted("ROLE_LECTEUR") ? path("lecteur") : "" }}">{{ app.user.username }}</a>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path("app_logout") }}">Déconnexion</a>
+								<a class="nav-link" href="{{ path("app_logout") }}">
+									<i class="fa fa-sign-out-alt"></i>
+								</a>
 							</li>
 						{% else %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path("app_login") }}">Connexion</a>
+								<a class="nav-link" href="{{ path("app_login") }}">
+									<i class="fa fa-sign-in-alt"></i>
+								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path("app_register") }}">Inscription</a>
+								<a class="nav-link" href="{{ path("app_register") }}">
+									<i class="fa fa-flag-o"></i>
+								</a>
 							</li>
 						{% endif %}
 					</ul>

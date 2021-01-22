@@ -18,9 +18,15 @@ class LecteurController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('lecteur/index.html.twig', [
-            'controller_name' => 'LecteurController',
-        ]);
+        /*
+            La page "Lecteur" va afficher toutes les informations du l'utilisateur connecté,
+            s'il a le ROLE_LECTEUR. On pourrait envoyer une variable contenant ces informations à 
+            la vue avec la méthode 'getUser' du contrôleur (qui retourne un objet Abonne, l'abonné actuellement connecté)
+                $abonneConnecte = $this->getUser();
+            Mais on peut avoir cet objet contenant l'abonné connecté directement dans le fichier Twig en utilisant 
+                app.user
+        */
+        return $this->render('lecteur/index.html.twig');
     }
 
     /**
