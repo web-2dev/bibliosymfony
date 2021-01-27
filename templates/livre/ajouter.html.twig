@@ -5,5 +5,45 @@
 {% block h1 %}Ajouter un livre{% endblock %}
 
 {% block body %}
-    {{ form(formLivre) }}
+    {# {{ form(formLivre) }} #}
+
+    {% set livre = formLivre.vars.value %}
+    {{ form_start(formLivre) }}
+        {{ form_row(formLivre.titre) }}
+        {{ form_row(formLivre.auteur) }}
+        <div class="form-group">
+            {{ form_label(formLivre.couverture) }}
+            <div class="row">
+                <div class="col-1">
+                    <img src="{{ livre.couverture ? asset("img/" ~ livre.couverture) : "" }}" alt="" class="mini" id="imgcouv">
+                </div>
+                <div class="col-11">
+                    {{ form_widget(formLivre.couverture) }}
+                </div>
+            </div>
+        </div>
+        
+        {{ form_row(formLivre.enregistrer, {
+            "row_attr":{
+                "class": "mt-3"
+            }
+        }) }}
+    {{ form_end(formLivre) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.addEventListener("load", function() {
+            $("input[type='file']").on("change", function(){
+                if ( $(this)[0].files[0] ) {
+                    var reader = new FileReader();     
+                    reader.onload = function (e) {
+                        $("#imgcouv").attr("src", e.target.result);
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                }
+            });
+        });
+    </script>
 {% endblock %}
